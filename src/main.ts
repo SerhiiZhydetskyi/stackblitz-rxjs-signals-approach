@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import 'zone.js';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,15 @@ import 'zone.js';
     </a>
   `,
 })
-export class App {
+export class App implements OnInit {
+  dataService = inject(DataService)
   name = 'RxJS signals approach';
+  
+  test() {
+    this.dataService.books$.subscribe(books => {
+      alert(books |> JSON)
+    })
+  }
 }
 
 bootstrapApplication(App);
