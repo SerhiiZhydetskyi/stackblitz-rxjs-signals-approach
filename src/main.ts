@@ -1,26 +1,37 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import 'zone.js';
-import { DataService } from './services/data.service';
+import {BooksStore} from "./services/books.store";
+import {JsonPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   template: `
-    <h1>Hello from {{ name }}!</h1>
-    <a target="_blank" href="https://angular.dev/overview">
-      Learn more about Angular
-    </a>
+      <div>
+          @for (book of booksStore.sortedBooks(); track book.id) {
+              <div>
+                  <div>{{ book.name }}ss</div>
+              </div>
+          }
+      </div>
+      <button (click)="test()">test</button>
+      <div>{{ booksStore | json }}</div>
   `,
+  imports: [
+    JsonPipe
+  ]
 })
-export class App implements OnInit {
-  dataService = inject(DataService)
-  name = 'RxJS signals approach';
-  
+export class App implements OnInit{
+
+  booksStore = inject(BooksStore);
+
+  ngOnInit() {
+    const query = this.booksStore.filter.query;
+    this.booksStore.loadByQuery(query);
+  }
+
   test() {
-    this.dataService.books$.subscribe(books => {
-      alert(books |> JSON)
-    })
   }
 }
 
