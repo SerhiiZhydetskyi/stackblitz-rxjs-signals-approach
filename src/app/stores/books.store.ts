@@ -8,7 +8,7 @@ import {pipe, switchMap, tap} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
-export const BookStore = function () {
+export const BooksStore = function () {
     let isLoading = signal(false);
 
     return signalStore(
@@ -17,7 +17,7 @@ export const BookStore = function () {
         withHooks({
             onInit(store, dataService = inject(DataService)) {
                 isLoading.set(true);
-                dataService.getBooks_ServerEmulator().pipe(
+                dataService.getAllBooks().pipe(
                     takeUntilDestroyed(),
                     tap(books => patchState(store, setEntities(books))),
                     tap(() => isLoading.set(false)),

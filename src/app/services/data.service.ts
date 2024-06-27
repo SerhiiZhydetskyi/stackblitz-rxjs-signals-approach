@@ -33,16 +33,16 @@ export class DataService {
         }
     ];
 
-    getBooks_ServerEmulator(): Observable<IBook[]> {
+    getAllBooks(): Observable<IBook[]> {
         return of<IBook[]>(this.books).pipe(
-            delay(2000)
+            delay(500)
         );
     }
 
     addBook(book: IBook): Observable<IBook> {
         this.books.push(book);
         return of(book).pipe(
-            delay(2000)
+            delay(500)
         );
     }
 
@@ -53,7 +53,7 @@ export class DataService {
         }
 
         return of(id).pipe(
-            delay(2000)
+            delay(500)
         )
     }
 }

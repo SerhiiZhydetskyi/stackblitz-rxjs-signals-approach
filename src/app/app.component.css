@@ -11,3 +11,11 @@
     align-items: center;
 }
 
+.btn-remove {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+}
+.text {
+    color: black;
+}

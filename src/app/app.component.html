@@ -8,7 +8,7 @@
     <mat-divider></mat-divider>
 
     @for (book of bookStore.entities(); track book.id) {
-        <mat-list-item>{{ book.name }} with id:{{book.id}} <button (click)="removeBook(book)">remove</button></mat-list-item>
+        <mat-list-item><span class="text">{{ book.name }} with id:{{book.id}}</span> <button class="btn-remove" (click)="removeBook(book)">remove</button></mat-list-item>
         <mat-divider></mat-divider>
     }
 </mat-list>
