@@ -1,0 +1,15 @@
+
+@if (bookStore.isLoading()) {
+    <div class="backdrop">
+        <mat-spinner class="spinner"></mat-spinner>
+    </div>
+}
+<mat-list>
+    <mat-divider></mat-divider>
+
+    @for (book of bookStore.entities(); track book.id) {
+        <mat-list-item>{{ book.name }} with id:{{book.id}} <button (click)="removeBook(book)">remove</button></mat-list-item>
+        <mat-divider></mat-divider>
+    }
+</mat-list>
+<button (click)="addBook()">addBook</button>
